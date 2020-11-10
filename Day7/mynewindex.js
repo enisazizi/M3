@@ -14,20 +14,23 @@ window.onload = async function(){
     // console.log(addressesAsArray(users))  
       
     // AscDes()
-        
+    console.log(NameList(users))
 }
-const NameList = function (){
-    let namesList = []
-    users.forEach(element => {
-        namesList.push(element.name)
-    });
+// const NameList = function (){
+//     let namesList = []
+//     users.forEach(element => {
+//         namesList.push(element.name)
+//     });
 
-  console.log(namesList)
 
 
     
-}
+// }
 
+const NameList = function(users){
+
+    return users.map((user)=>user.name)
+}
 const SearchFunction = function(){
 
     const myInput = document.getElementById("inputField")
@@ -55,6 +58,8 @@ function addressesAsArray(users){
 
 
 function AscDes(){
+
+    myli = " "
     let asc = users.map((user)=> user.name).sort()
     console.log(asc)
     
@@ -62,14 +67,18 @@ function AscDes(){
     console.log(des)
 
         let myUl = document.getElementById("myUl")
-        let myli= document.createElement("li");
+      
 
+    asc.map((e)=> {
+          let myli= document.createElement("li");
+          myli.innerHTML = `${e}`
+          myUl.appendChild(myli)
+    })
     
-    
+        
 
 
-
-        myUl.appendChild(myli)
+      
 }
 
 
