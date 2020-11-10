@@ -56,24 +56,31 @@ function addressesAsArray(users){
    
 }
 
-
 function AscDes(){
-
-    myli = " "
-    let asc = users.map((user)=> user.name).sort()
-    console.log(asc)
     
-    let des = asc.reverse()
-    console.log(des)
+    
+    let asc = users.map((user)=> user.name).sort()
 
         let myUl = document.getElementById("myUl")
-      
+        myUl.innerHTML = ""
+            if(myUl.className == "asc"){
+                asc.map((e)=> {
+                    let myli= document.createElement("li");
+                    myli.innerHTML = e
+                    myUl.appendChild(myli)
+                    myUl.className=""
+              })
+            }else {
+                let des = asc.reverse()
+                des.map((e)=> {
+                    let myli= document.createElement("li");
+                    myli.innerHTML = e
+                    myUl.appendChild(myli)
+                    myUl.className="asc"
+              })
+            }
 
-    asc.map((e)=> {
-          let myli= document.createElement("li");
-          myli.innerHTML = `${e}`
-          myUl.appendChild(myli)
-    })
+   
     
         
 
