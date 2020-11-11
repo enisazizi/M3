@@ -36,7 +36,7 @@ const SearchFunction = function(){
     const myInput = document.getElementById("inputField")
     const mySelect = document.getElementById("select")
     
-    
+   
     const user = users.filter(e=> e[mySelect.value].includes(myInput.value))
 
     // console.log(user)
@@ -57,18 +57,26 @@ function addressesAsArray(users){
 }
 
 function AscDes(){
-    
-    
     let asc = users.map((user)=> user.name).sort()
 
         let myUl = document.getElementById("myUl")
         myUl.innerHTML = ""
             if(myUl.className == "asc"){
                 asc.map((e)=> {
+                    let id;
+                    users.map((event)=>{
+                        if(event.name ===e){id=event.id}
+
+                        
+                    })
                     let myli= document.createElement("li");
-                    myli.innerHTML = e
+                    
+                    myli.innerHTML = `<a href="Details.html?id=${id}">${e}</a>`
+                
                     myUl.appendChild(myli)
                     myUl.className=""
+                    id=""
+                 
               })
             }else {
                 let des = asc.reverse()
@@ -79,18 +87,7 @@ function AscDes(){
                     myUl.className="asc"
               })
             }
-
-   
-    
-        
-
-
       
 }
-
-
-
-    
-
 
    
