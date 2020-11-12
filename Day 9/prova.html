@@ -52,7 +52,7 @@
   
 
     <script>
-      window.onload = async () => {
+   window.onload = async () => {
         const url = "https://striveschool-api.herokuapp.com/api/product/";
         let rowDiv = document.querySelector("#currentEvents");
 
@@ -61,8 +61,8 @@
           headers: {
          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzUxYzRiY2RlMTAwMTc2MTZhODYiLCJpYXQiOjE2MDUwOTI2MzcsImV4cCI6MTYwNjMwMjIzN30.h5kKXLJCe89Kd9kfTrCzbqpr-B0FRce5RkbQySrDTLo"
 }
-} )
-          let events = await response.json(); 
+} )// this is getting the response from the API for a fetch request
+          let events = await response.json(); // this is transforming the response in a json, asyncronous operation!
          console.log(events)
           if (events.length > 0) {
             events.forEach((e) => {
@@ -99,11 +99,9 @@
         }
       };
 
-      const showUrSelf = ()=>{
 
-        
 
-      }
+     
     </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

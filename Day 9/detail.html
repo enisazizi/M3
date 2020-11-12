@@ -27,6 +27,15 @@
          animation: images 3s;
       }
 
+        @keyframes spin { 100% {  transform:rotate(360deg); } }
+
+        .image {
+    
+    
+    
+      animation:spin 1s linear ;
+  }
+
 
 
   </style>
@@ -91,19 +100,18 @@
             headers: {
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzUxYzRiY2RlMTAwMTc2MTZhODYiLCJpYXQiOjE2MDUwOTI2MzcsImV4cCI6MTYwNjMwMjIzN30.h5kKXLJCe89Kd9kfTrCzbqpr-B0FRce5RkbQySrDTLo"
 }
-          }); // contacting the endpoint for a single event
-          let event = await response.json(); // transforming the response body in an usable object, asyncronous operation!
+          }); 
+          let event = await response.json(); 
            
-          // Qitu jom tu punu -------------------------------------------12312312312-----------------
           
           let element =  document.querySelector("#details");
          
         
           element.innerHTML = `
-          <div class="col col-6">
+          <div class="col col-6 image">
             <img src="${event.imageUrl} class="img-fluid" style="width:20rem; height:25rem;">
             </div>
-            <div class="col col-6">
+            <div class="col col-6 mt-5">
               <ul class="list-group list-group-flush">
               <li class="list-group-item d-flex justify-content-around"><h5>Product:</h5><b>${event.name}</b></li>
               <li class="list-group-item d-flex justify-content-around"><h5>Description:</h5><b>${event.description}</b></li>
@@ -125,7 +133,7 @@
             headers:{"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzUxYzRiY2RlMTAwMTc2MTZhODYiLCJpYXQiOjE2MDUwOTI2MzcsImV4cCI6MTYwNjMwMjIzN30.h5kKXLJCe89Kd9kfTrCzbqpr-B0FRce5RkbQySrDTLo"
  }});
           if (response.ok) {
-            // checking the ok property which stores the successful result of the operation
+      
             alert("Event deleted successfully");
             location.assign("myindex.html");
           } else {
