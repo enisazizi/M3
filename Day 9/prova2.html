@@ -110,37 +110,37 @@
     </div>
 
     <script>
-      let id;
-      const url = "https://striveschool-api.herokuapp.com/api/product/";
 
-      window.onload = async ()=>{
-        let urlParams = new URLSearchParams(window.location.search); // creating a new instance of the URLSearchParams object
-        id = urlParams.get("id"); // saving the id retrieved from the url address bar
+        const url = "https://striveschool-api.herokuapp.com/api/product/";
+        let id ;
+    window.onload = await ()=>{
+
+        let urlParams = new URLSearchParams(window.location.search);
+        id = urlParams.get("id");
+
         if(id){
-        
-        let response = await fetch(url+id,{
-            headers:{  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzUxYzRiY2RlMTAwMTc2MTZhODYiLCJpYXQiOjE2MDUwOTI2MzcsImV4cCI6MTYwNjMwMjIzN30.h5kKXLJCe89Kd9kfTrCzbqpr-B0FRce5RkbQySrDTLo"
-        }
-        })
-        let event = await response.json(); // transforming the response body in an usable object, asyncronous operation!
-          document.getElementById("name").value = event.name
-          document.getElementById("description").value = event.description
-          document.getElementById("brand").value = event.brand
-          document.getElementById("price").value = event.price
-          document.getElementById("img-url").value = event.imageUrl
-          document.getElementById("img-url").setAttribute("disabled",true)
-           
-        }
+
+            let response = await fetch(url+id,{
+                headers:{  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzUxYzRiY2RlMTAwMTc2MTZhODYiLCJpYXQiOjE2MDUwOTI2MzcsImV4cCI6MTYwNjMwMjIzN30.h5kKXLJCe89Kd9kfTrCzbqpr-B0FRce5RkbQySrDTLo"
+}
+            })
+            let event = await response.json();
+
+            document.getElementById("name").value = event.name
+            document.getElementById("description").value = event.description
+            document.getElementById("brand").value = event.brand
+            document.getElementById("price").value = event.price
+            document.getElementById("img-url").value = event.imageUrl
+            document.getElementById("img-url").setAttribute("disabled",true)
 
         }
-        const handleSubmit = (e) => {
+    }
+    const handleSubmit = (e) => {
         e.preventDefault(); // preventing the default browser event handling
         submitEvent();
       };
-      const submitEvent = async () => {
-        let spinner = document.querySelector("#loadingSpinner");
-        spinner.classList.toggle("d-none");
 
+      const submitEvent = async ()=>{
         let myEvent = {
           // gathering the data from the form, field by field
           name: document.querySelector("#name").value,
@@ -153,52 +153,35 @@
 
         try{
 
-            let response ;
-          
-          if(id){
+            let response;
+            if(id){
 
-            response =  await fetch(url +id, {
-            // our POST request is made with the fetch method as well!
-            method: "PUT", // declaring the CRUD method
-            body: JSON.stringify(myEvent), // we need to stringify the JS object in order to send it
+                response = await fetch(url+id{
+                    method: "PUT", 
+            body: JSON.stringify(myEvent), 
             headers: new Headers({
-              // we need also to declare the content type
+           
               "Content-Type": "application/json",
               "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzUxYzRiY2RlMTAwMTc2MTZhODYiLCJpYXQiOjE2MDUwOTI2MzcsImV4cCI6MTYwNjMwMjIzN30.h5kKXLJCe89Kd9kfTrCzbqpr-B0FRce5RkbQySrDTLo"
             }),
-          });
 
-          }else{
+                })
+            }
+        }else{
 
-            response = await fetch(url, {
-              // our POST request is made with the fetch method as well!
-              method: "POST", // declaring the CRUD method
-              body: JSON.stringify(myEvent), // we need to stringify the JS object in order to send it
-              headers: new Headers({
-                // we need also to declare the content type
-                "Content-Type": "application/json",
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzUxYzRiY2RlMTAwMTc2MTZhODYiLCJpYXQiOjE2MDUwOTI2MzcsImV4cCI6MTYwNjMwMjIzN30.h5kKXLJCe89Kd9kfTrCzbqpr-B0FRce5RkbQySrDTLo"
-
-              }),
-            });
-          }
+        response = await fetch(url, {
         
-         
-          if (response.ok) {
-            // checking the ok property which stores the successful result of the operation
-            alert("Event created successfully");
-            location.assign("myindex.html");
-          } else {
-            alert("Something went wrong!");
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
+        method: "POST", 
+        body: JSON.stringify(myEvent), 
+        headers: new Headers({
         
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzUxYzRiY2RlMTAwMTc2MTZhODYiLCJpYXQiOjE2MDUwOTI2MzcsImV4cCI6MTYwNjMwMjIzN30.h5kKXLJCe89Kd9kfTrCzbqpr-B0FRce5RkbQySrDTLo"
 
-      
+        }),
+        });
+
+      }
     
     </script>
     <!-- Optional JavaScript -->

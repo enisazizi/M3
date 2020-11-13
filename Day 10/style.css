@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+
+body {
+  font-family: "Noto Sans", sans-serif;
+  background: #0f171e;
+}
+
+nav {
+  display: flex;
+}
+
+nav ul {
+  width: 100%;
+
+  justify-content: space-between;
+}
+
+#list {
+  display: flex;
+}
+
+#searchbar {
+  display: flex;
+}
+h1 {
+  color: #f3f3f3;
+}
+h3 {
+  font-size: 19px;
+  display: inline-block;
+}
+
+img:hover {
+  box-shadow: 0 0 2px 1px white;
+}
+
+footer {
+  font-size: 12px;
+}
+
+footer a {
+  color: #757575;
+}
+
+footer a:hover {
+  color: #f3f3f3;
+  text-decoration: none;
+}
+
+.overlay {
+    
+  position: absolute;
+ 
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  overflow: hidden;
+  width: 100%;
+  
+  transform: scale(0);
+  transition: .6s ease;
+  background-color: black;
+  
+  
+
+}
+li{
+  transition: .3s ease;
+}
+
+p{
+  color: white;
+}
+
+  
+
+.info-content:hover .overlay {
+  transform: scale(1);
+  
+  z-index: 10;
+  font-size: 10px;
+  
+  
+  
+  
+  
+  
+  
+  
+    
+}
+.info-content:hover .overlay .text{
+  transform: scale(1.3);
+  z-index: 1;
+  
+  
+  /* 150 rreshti te stefano mos e harro gllup line heigt  keyframes */
+    
+}

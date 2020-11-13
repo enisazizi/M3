@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Enith</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <style>
+        body{
+
+            background-color: #333;
+            color: white;
+        }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 d-flex justify-content-center">
+      <a class="navbar-brand" href="index.html">Home</a>
+    
+       
+     
+    </nav>
+
+    <div class="container">
+   
+      <h2 class="text-center mt-5">Create a new Product</h2>
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <form onsubmit="handleSubmit(event)">
+            <div class="form-group">
+              <label for="name">Movie name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Write here the event name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="description">Movie description</label>
+              <textarea
+                class="form-control"
+                id="description"
+                rows="3"
+                placeholder="Write here the event description"
+                required
+              ></textarea>
+            </div>
+
+           
+              <div class="form-group">
+                <label for="category">Category</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="category"
+                  placeholder="Write the brand"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="img-url">Product img-url</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="img-url"
+                  placeholder="product url"
+
+                />
+              </div>
+
+            
+            
+
+         
+            <div class="form-group">
+              <button
+                class="btn btn-light"
+                type="submit"
+                value="Submit event"
+              >
+              <span
+              class="spinner-border spinner-border-sm d-none"
+              role="status"
+              aria-hidden="true"
+              id="loadingSpinner"
+            ></span>
+                Submit event
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      //READ => GET https://striveschool.herokuapp.com/api/agenda/ ==> get all the items from API
+      //CREATE => POST https://striveschool.herokuapp.com/api/agenda/ ==> create a new item
+      const url = "https://striveschool-api.herokuapp.com/api/movies/";
+
+let id ;
+let mycategory;
+window.onload = async () => {
+
+
+  let urlParams = new URLSearchParams(window.location.search);
+  mycategory = urlParams.get("category")
+  id = urlParams.get("id");
+  if (id) {
+    let response = await fetch(url + mycategory ,{
+      headers:{  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzUxYzRiY2RlMTAwMTc2MTZhODYiLCJpYXQiOjE2MDUwOTI2MzcsImV4cCI6MTYwNjMwMjIzN30.h5kKXLJCe89Kd9kfTrCzbqpr-B0FRce5RkbQySrDTLo"
+}
+    }); // contacting the endpoint for a single event
+    let event = await response.json(); // transforming the response body in an usable object, asyncronous operation!
+    console.log(event)
+    let myevent ;
+    event.forEach(element => {
+        if(element._id == id){
+
+            myevent=element;
+        }
+    });
+
+
+    document.getElementById("name").value = myevent.name
+    document.getElementById("description").value = myevent.description
+    document.getElementById("category").value = myevent.category
+    
+    document.getElementById("img-url").value = myevent.imageUrl
+ 
+     
+  }
+}
+
+const handleSubmit = (event) => {
+  event.preventDefault(); // preventing the default browser event handling
+  submitEvent();
+};
+
+
+
+
+const submitEvent = async () => {
+  let spinner = document.querySelector("#loadingSpinner");
+  spinner.classList.toggle("d-none");
+
+  let myEvent = {
+    // gathering the data from the form, field by field
+    name: document.querySelector("#name").value,
+    description: document.querySelector("#description").value,
+    category: document.querySelector("#category").value,
+    imageUrl : document.querySelector("#img-url").value,
+   
+      
+  };
+                                        
+  try {
+    let response ;
+    
+    if(id){
+
+      response =  await fetch(url +mycategory, {
+      
+      method: "PUT", 
+      body: JSON.stringify(myEvent), 
+      headers: new Headers({
+     
+        "Content-Type": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzUxYzRiY2RlMTAwMTc2MTZhODYiLCJpYXQiOjE2MDUyNTk0MzEsImV4cCI6MTYwNjQ2OTAzMX0.oWtoAaAelSCimGyyPtHITRTFXePIDIUPqbdlM9cNAtg"
+      }),
+    });
+
+    }else{
+
+      response = await fetch(url, {
+       
+        method: "POST", 
+        body: JSON.stringify(myEvent), 
+        headers: new Headers({
+         
+          "Content-Type": "application/json",
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzUxYzRiY2RlMTAwMTc2MTZhODYiLCJpYXQiOjE2MDUyNTk0MzEsImV4cCI6MTYwNjQ2OTAzMX0.oWtoAaAelSCimGyyPtHITRTFXePIDIUPqbdlM9cNAtg"
+
+        }),
+      });
+    }
+  
+   
+    if (response.ok) {
+      // checking the ok property which stores the successful result of the operation
+      alert("Event created successfully");
+      location.assign("index.html");
+    } else {
+      alert("Something went wrong!");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+     
+
+
+      
+</script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+   
+  </body>
+</html>

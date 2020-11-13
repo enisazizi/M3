@@ -143,8 +143,8 @@
         }
       }
 
-      const handleSubmit = (e) => {
-        e.preventDefault(); // preventing the default browser event handling
+      const handleSubmit = (event) => {
+        event.preventDefault(); // preventing the default browser event handling
         submitEvent();
       };
 
@@ -200,7 +200,7 @@
           if (response.ok) {
             // checking the ok property which stores the successful result of the operation
             alert("Event created successfully");
-            location.assign("myindex.html");
+            location.assign("index.html");
           } else {
             alert("Something went wrong!");
           }
